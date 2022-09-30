@@ -52,6 +52,8 @@ class Casa{
 
 class Espada{
 	method esFuerte() = true
+	method actualizarRecursos(obrero){}
+	
 }
 
 class Escudo{
@@ -59,6 +61,11 @@ class Escudo{
 	var reforzado = false
 	method esFuerte() = material.resistencia() > 50 || reforzado
 
+	method actualizarRecursos(obrero){
+		obrero.actualizarStock(new Item(
+			material=material, 
+			cantidad= if (reforzado) 20 else 10 ))
+	}
 }
 
 
