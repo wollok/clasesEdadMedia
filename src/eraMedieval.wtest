@@ -1,0 +1,17 @@
+import example.*
+
+test "jony construye y gasta recursos" {
+	var onObrero = new Obrero()
+	var unaCasa = new Casa(cuantosRecursosRequiere = 100)
+	onObrero.construir(unaCasa)
+	assert.equals(900, onObrero.recursos())
+
+}
+
+
+test "jony puedeDefenderse" {
+	var jony = new Obrero()
+
+	assert.that(jony.puedeDefenderse())
+
+}
