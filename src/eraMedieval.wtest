@@ -1,17 +1,37 @@
 import example.*
 
+describe "test medievales"{
+	const madera = new Material(resistencia= 40 )
+	const hierro = new Material(resistencia= 100 )
+	const piedra = new Material(resistencia= 80 )
+
+	var onObrero = new Obrero( recursosDisponibles = [
+		new Item(material = hierro, cantidad = 1000),
+		new Item(material = piedra, cantidad = 500),
+		new Item(material = madera, cantidad = 2000)])
+
+	var unaCasa = new Casa(recursos = [
+		new Item(material = hierro, cantidad = 25),
+		new Item(material = madera, cantidad = 100)])
+
+	
 test "jony construye y gasta recursos" {
-	var onObrero = new Obrero()
-	var unaCasa = new Casa(cuantosRecursosRequiere = 100)
 	onObrero.construir(unaCasa)
-	assert.equals(900, onObrero.recursos())
+	assert.equals(3375, onObrero.recursos())
 
 }
 
 
-test "jony puedeDefenderse" {
-	var jony = new Obrero()
+test "jony puedeDefenderse con un escudo de hierro" {
 
-	assert.that(jony.puedeDefenderse())
+	assert.that(onObrero.puedeDefenderse())
+
+}
+
+test "jony no puedeDefenderse con un escudo de madera sin reforzar" {
+	onObrero.arma(new Escudo(material = madera))
+	
+	assert.notThat(onObrero.puedeDefenderse())
+}
 
 }
